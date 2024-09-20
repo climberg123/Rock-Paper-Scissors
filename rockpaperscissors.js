@@ -22,4 +22,26 @@ function getHumanChoice(userInput) {
     return userInput;
 }
 
+// Keep track of the score for user and computer
+let humanScore = 0;
+let computerScore = 0;
 
+const winConditions = {
+    0: 2, 
+    1: 0, 
+    2: 1
+};
+
+function playRound(humanChoice, computerChoice) {
+    if (humanChoice === computerChoice) {
+        console.log("You tied!");
+    } else if (winConditions[humanChoice] === computerChoice) {
+        console.log("You win!");
+        humanScore += 1;
+    } else {
+        console.log("You lose!");
+        computerScore += 1;
+    }
+}
+
+console.log(playRound(1, 100));
