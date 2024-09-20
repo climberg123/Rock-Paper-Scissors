@@ -28,25 +28,43 @@ function getHumanChoice() {
     return userInput;
 }
 
-// Keep track of the score for user and computer
-let humanScore = 0;
-let computerScore = 0;
+function playGame() {
+    // Keep track of the score for user and computer
+    let humanScore = 0;
+    let computerScore = 0;
 
-const winConditions = {
-    "rock": "scissors",
-    "paper": "rock",
-    "scissors": "paper"
-};
+    // Rounds played counter
+    let roundsPlayed = 0;
 
-function playRound(humanChoice, computerChoice) {
-    if (humanChoice === computerChoice) {
-        console.log("You tied!");
-    } else if (winConditions[humanChoice] === computerChoice) {
-        console.log("You win!");
-        humanScore += 1;
-    } else {
-        console.log("You lose!");
-        computerScore += 1;
+    const winConditions = {
+        "rock": "scissors",
+        "paper": "rock",
+        "scissors": "paper"
+    };
+
+    // Plays single rounds of the game
+    function playRound(humanChoice, computerChoice) {
+        console.log(`You: ${humanChoice} vs Computer: ${computerChoice}`);
+        if (humanChoice === computerChoice) {
+            console.log("You tied!");
+        } else if (winConditions[humanChoice] === computerChoice) {
+            console.log("You win!");
+            humanScore++;
+        } else {
+            console.log("You lose!");
+            computerScore++;
+        }
     }
+
+    while (roundsPlayed < 5) {
+        playRound(getHumanChoice(), getComputerChoice());
+        roundsPlayed++;
+    }
+
+    console.log(`${(humanScore > computerScore) ? "You have" :
+        (humanScore < computerScore) ? "The computer has" :
+        "You both tied, and neither has"
+    } won. In ${roundsPlayed} played, you won ${humanScore} times, and the computer has won ${computerScore} times.`);
 }
 
+playGame();
