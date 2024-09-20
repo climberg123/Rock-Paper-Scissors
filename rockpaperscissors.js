@@ -1,24 +1,30 @@
 // Generate random move for computer
 function getComputerChoice() {
-    return Math.floor(Math.random() * 3);
+    switch (Math.floor(Math.random() * 3)) {
+        case 0:
+            return "rock";
+        case 1:
+            return "paper";
+        case 2:
+            return "scissors";
+    }
 }
 
 // Get player's chosen move, convert to number for future comparison
-function getHumanChoice(userInput) {
+function getHumanChoice() {
+    let userInput = prompt("Enter your move:").toLowerCase();
+
     switch (userInput) {
         case "rock":
-            userInput = 0;
             break;
         case "paper":
-            userInput = 1;
             break;
         case "scissors":
-            userInput = 2;
             break;
         default:
-            userInput = getHumanChoice(prompt("Please type rock, paper, or scissors.").toLowerCase());
+            console.log("Please type rock, paper, or scissors:");
+            userInput = getHumanChoice();
     }
-
     return userInput;
 }
 
@@ -27,9 +33,9 @@ let humanScore = 0;
 let computerScore = 0;
 
 const winConditions = {
-    0: 2, 
-    1: 0, 
-    2: 1
+    "rock": "scissors",
+    "paper": "rock",
+    "scissors": "paper"
 };
 
 function playRound(humanChoice, computerChoice) {
@@ -44,4 +50,3 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-console.log(playRound(1, 100));
